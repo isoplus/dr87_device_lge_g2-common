@@ -130,7 +130,6 @@ RECOVERY_SDCARD_ON_DATA := true
 BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_SUPPRESS_SECURE_ERASE := true
@@ -145,5 +144,6 @@ PRODUCT_COPY_FILES += device/lge/g2-common/twrp/twrp.fstab:recovery/root/etc/twr
 #PRODUCT_COPY_FILES += device/lge/g2-common/twrp/sensors.sh:recovery/root/sensors.sh
 PRODUCT_COPY_FILES += device/lge/g2-common/twrp/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
-# Enable f2fs tools in twrp
+# Enable ext4 & f2fs 
+TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
