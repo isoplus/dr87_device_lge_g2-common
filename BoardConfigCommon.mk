@@ -43,7 +43,6 @@ BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x05000000 --tags_offset 0x04800000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_CUSTOM_BOOTIMG_MK := device/lge/g2-common/releasetools/mkbootimg.mk
-TARGET_KERNEL_SOURCE := kernel/lge/4.4.2
 
 # Audio
 BOARD_USES_ALSA_AUDIO:= true
@@ -73,11 +72,8 @@ COMMON_GLOBAL_CFLAGS += -DLG_CAMERA_HARDWARE -DLPA_DEFAULT_BUFFER_SIZE=512
 # Recovery
 RECOVERY_FSTAB_VERSION = 2
 TARGET_RECOVERY_FSTAB = device/lge/g2-common/ramdisk/fstab.g2
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 ENABLE_LOKI_RECOVERY := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
@@ -124,3 +120,30 @@ COMMON_GLOBAL_CFLAGS += -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' -DBOA
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
 
+# Custom Kernel Source
+TARGET_KERNEL_SOURCE := kernel/lge/aicp
+
+# TWRP
+RECOVERY_VARIANT := twrp
+DEVICE_RESOLUTION := 1080x1920
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_HAS_LARGE_FILESYSTEM := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+BOARD_SUPPRESS_SECURE_ERASE := true
+TW_BRIGHTNESS_PATH := "/sys/devices/mdp.0/qcom\x2cmdss_fb_primary.175/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+TW_NO_USB_STORAGE := true
+TW_INCLUDE_JB_CRYPTO := true
+TARGET_RECOVERY_INITRC := device/lge/g2-common/twrp/init.rc
+
+# Add custom files for twrp
+PRODUCT_COPY_FILES += device/lge/g2-common/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
+#PRODUCT_COPY_FILES += device/lge/g2-common/twrp/sensors.sh:recovery/root/sensors.sh
+PRODUCT_COPY_FILES += device/lge/g2-common/twrp/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
+
+# Enable f2fs tools in twrp
+TARGET_USERIMAGES_USE_F2FS := true
