@@ -1,4 +1,6 @@
 import /init.recovery.${ro.hardware}.rc
+import /twrp_f320/init.recovery.g2.f320.rc
+
 
 on early-init
     start ueventd
@@ -9,7 +11,6 @@ on init
     export LD_LIBRARY_PATH .:/sbin
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
-    export EXTERNAL_STORAGE /sdcard
 
     mkdir /boot
     mkdir /recovery

@@ -138,9 +138,10 @@ TW_MAX_BRIGHTNESS := 255
 TW_NO_USB_STORAGE := true
 TW_INCLUDE_JB_CRYPTO := true
 TARGET_RECOVERY_INITRC := device/lge/g2-common/twrp/init.rc
+TW_INTERNAL_STORAGE_PATH := "/sdcard"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 
 # Add custom files for twrp
-PRODUCT_COPY_FILES += device/lge/g2-common/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
 PRODUCT_COPY_FILES += device/lge/g2-common/twrp/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 # Enable ext4 & f2fs 
