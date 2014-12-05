@@ -121,7 +121,7 @@ COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
 
 # Custom Kernel Source
-TARGET_KERNEL_SOURCE := kernel/lge/aicp
+TARGET_KERNEL_SOURCE := kernel/lge/msm8974
 
 # TWRP
 RECOVERY_VARIANT := twrp
@@ -144,3 +144,20 @@ PRODUCT_COPY_FILES += device/lge/g2-common/twrp/postrecoveryboot.sh:recovery/roo
 # Enable ext4 & f2fs 
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+
+# Board has External SD (i.e. F320)
+ifeq ($(TARGET_DEVICE),f320)
+    BOARD_HAS_NO_REAL_SDCARD := false
+    TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+    TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+
+    PRODUCT_COPY_FILES += device/lge/g2-common/twrp/twrp.g2.has_sd.fstab:recovery/root/etc/twrp.fstab
+    PRODUCT_COPY_FILES += device/lge/g2-common/twrp/init.recovery.sd_card.rc:recovery/root/init.recovery.sd_card.rc
+
+# Board has no External SD
+else
+    BOARD_HAS_NO_REAL_SDCARD := true
+    PRODUCT_COPY_FILES += device/lge/g2-common/twrp/twrp.g2.no_sd.fstab:recovery/root/etc/twrp.fstab
+endif
+
+
